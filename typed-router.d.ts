@@ -45,7 +45,7 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-'/lesson-detail': RouteRecordInfo<
+    '/lesson-detail': RouteRecordInfo<
       '/lesson-detail',
       '/lesson-detail',
       Record<never, never>,
@@ -69,6 +69,13 @@ declare module 'vue-router/auto-routes' {
     '/mypage': RouteRecordInfo<
       '/mypage',
       '/mypage',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/reservation-completed': RouteRecordInfo<
+      '/reservation-completed',
+      '/reservation-completed',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -126,7 +133,7 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-'src/pages/lesson-detail.vue': {
+    'src/pages/lesson-detail.vue': {
       routes:
         | '/lesson-detail'
       views:
@@ -147,6 +154,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/mypage.vue': {
       routes:
         | '/mypage'
+      views:
+        | never
+    }
+    'src/pages/reservation-completed.vue': {
+      routes:
+        | '/reservation-completed'
       views:
         | never
     }
