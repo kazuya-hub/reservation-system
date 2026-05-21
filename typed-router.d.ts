@@ -45,6 +45,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/login-error': RouteRecordInfo<
+      '/login-error',
+      '/login-error',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/signup-completed': RouteRecordInfo<
       '/signup-completed',
       '/signup-completed',
@@ -95,6 +102,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/login.vue': {
       routes:
         | '/login'
+      views:
+        | never
+    }
+    'src/pages/login-error.vue': {
+      routes:
+        | '/login-error'
       views:
         | never
     }
