@@ -38,6 +38,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/lesson-calendar': RouteRecordInfo<
+      '/lesson-calendar',
+      '/lesson-calendar',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/login': RouteRecordInfo<
       '/login',
       '/login',
@@ -103,6 +110,12 @@ declare module 'vue-router/auto-routes' {
     'src/pages/index.vue': {
       routes:
         | '/'
+      views:
+        | never
+    }
+    'src/pages/lesson-calendar.vue': {
+      routes:
+        | '/lesson-calendar'
       views:
         | never
     }

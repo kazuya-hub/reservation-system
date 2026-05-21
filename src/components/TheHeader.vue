@@ -6,9 +6,10 @@
         </RouterLink>
         <nav>
             <ul>
-                <li><RouterLink to="/">ホーム</RouterLink></li>
                 <li><RouterLink to="/signup-email">新規登録</RouterLink></li>
                 <li><RouterLink to="/login">ログイン</RouterLink></li>
+                <li><RouterLink to="/lesson-calendar">レッスンカレンダー</RouterLink></li>
+                <li><RouterLink to="/mypage">マイページ</RouterLink></li>
             </ul>
         </nav>
     </header>
