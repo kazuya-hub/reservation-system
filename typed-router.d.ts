@@ -45,9 +45,30 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/newpage': RouteRecordInfo<
-      '/newpage',
-      '/newpage',
+    '/signup-completed': RouteRecordInfo<
+      '/signup-completed',
+      '/signup-completed',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/signup-email': RouteRecordInfo<
+      '/signup-email',
+      '/signup-email',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/signup-email-sent': RouteRecordInfo<
+      '/signup-email-sent',
+      '/signup-email-sent',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/signup-form': RouteRecordInfo<
+      '/signup-form',
+      '/signup-form',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -77,9 +98,27 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/newpage.vue': {
+    'src/pages/signup-completed.vue': {
       routes:
-        | '/newpage'
+        | '/signup-completed'
+      views:
+        | never
+    }
+    'src/pages/signup-email.vue': {
+      routes:
+        | '/signup-email'
+      views:
+        | never
+    }
+    'src/pages/signup-email-sent.vue': {
+      routes:
+        | '/signup-email-sent'
+      views:
+        | never
+    }
+    'src/pages/signup-form.vue': {
+      routes:
+        | '/signup-form'
       views:
         | never
     }
