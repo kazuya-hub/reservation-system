@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 
+button,
 a.router-link-as-button {
     border: 1px solid #3b82f6;
     color: #3b82f6;
@@ -11,9 +12,13 @@ a.router-link-as-button {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
+    background-color: #ffffff;
     transition: background-color 0.2s;
+
+    cursor: pointer;
 }
 
+button:hover,
 a.router-link-as-button:hover {
     background-color: #eff6ff;
 }
