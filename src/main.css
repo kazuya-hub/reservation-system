@@ -2,3 +2,18 @@
 * {
     box-sizing: border-box;
 }
+
+a.router-link-as-button {
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+a.router-link-as-button:hover {
+    background-color: #eff6ff;
+}
