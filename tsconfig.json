@@ -6,6 +6,18 @@
     },
     {
       "path": "./tsconfig.app.json"
-    }
-  ]
+    },
+  ], 
+  "buildOptions": [
+    "./typed-router.d.ts"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  },
+  "vueCompilerOptions": {
+    "plugins": [
+      "vue-router/volar/sfc-route-blocks",
+      "vue-router/volar/sfc-typed-router"
+    ]
+  }
 }
