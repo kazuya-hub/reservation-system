@@ -17,7 +17,7 @@ function handleLogout() {
     <h3>予約状況</h3>
     <LessonCalendar />
     <div class="actions">
-        <RouterLink to="/lesson-calendar" class="router-link-as-button">予約の確認・変更</RouterLink>
+        <RouterLink to="/lesson-calendar" class="router-link-as-button">レッスンを予約する</RouterLink>
         <button @click="handleLogout">ログアウトする</button>
     </div>
 </template>

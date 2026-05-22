@@ -14,7 +14,9 @@ const lesson = {
 
 <template>
     <section class="lesson-detail">
-        <h2>レッスン情報</h2>
+        <h2>予約完了</h2>
+
+        <p>下記の内容で予約しました</p>
 
         <dl class="detail-list">
             <div class="detail-row">
