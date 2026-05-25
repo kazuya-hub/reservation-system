@@ -1,25 +1,38 @@
-
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-function handleLogin(event: Event) {
+let loginID = ref("");
+let password = ref("");
+
+async function handleLogin(event: Event) {
     event.preventDefault();
 
-    // ログイン処理の実装（例: API呼び出し、バリデーションなど）
-    console.log("ログイン処理を実行");
+    const params = new URLSearchParams()
+    params.append("username", loginID.value)
+    params.append("password", password.value)
 
-    if (Math.random() > 0.5) {
-        // ログイン成功
-        console.log("ログイン成功");
-        router.push("/mypage");
-
+    const response = await fetch(
+        "http://127.0.0.1:8000/token",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: params.toString(),
+        }
+    );
+    
+    if (response.ok) {
+        const data = await response.json();
+        const accessToken: String = data.access_token;
+        // TODO: トークンを保管して再利用する
     } else {
-        // ログイン失敗
-        console.log("ログイン失敗");
-        router.push("/login-error");
+        window.alert("認証に失敗しました");
     }
+
 
 }
 </script>
@@ -31,12 +44,12 @@ function handleLogin(event: Event) {
         <section class="left-column">
             <div class="field-row">
                 <label for="login-id">ログインID</label>
-                <input id="login-id" type="text" placeholder="ログインIDを入力" />
+                <input id="login-id" type="text" v-model=loginID placeholder="ログインIDを入力" />
             </div>
 
             <div class="field-row">
                 <label for="password">パスワード</label>
-                <input id="password" type="password" placeholder="パスワードを入力" />
+                <input id="password" type="password" v-model=password placeholder="パスワードを入力" />
             </div>
 
             <button @click="handleLogin">ログインする</button>
