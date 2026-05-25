@@ -24,6 +24,11 @@ onMounted(async () => {
 
 </script>
 
+<route lang="yaml">
+    meta:
+        requiresAuth: true
+</route>
+
 <template>
     <h2>マイページ</h2>
     <h3>予約状況</h3>
