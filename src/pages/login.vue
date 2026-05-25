@@ -2,7 +2,13 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
+import * as auth from "@/services/auth.ts";
+
 const router = useRouter();
+
+function goToMypage() {
+    router.push("mypage");
+}
 
 let loginID = ref("");
 let password = ref("");
@@ -14,21 +20,10 @@ async function handleLogin(event: Event) {
     params.append("username", loginID.value)
     params.append("password", password.value)
 
-    const response = await fetch(
-        "http://127.0.0.1:8000/token",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: params.toString(),
-        }
-    );
-    
-    if (response.ok) {
-        const data = await response.json();
-        const accessToken: string = data.access_token;
-        // TODO: トークンを保管して再利用する
+    const success = await auth.tryLogin(loginID.value, password.value);
+
+    if (success) {
+        goToMypage();
     } else {
         window.alert("認証に失敗しました");
     }
