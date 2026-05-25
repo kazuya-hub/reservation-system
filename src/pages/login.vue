@@ -27,7 +27,7 @@ async function handleLogin(event: Event) {
     
     if (response.ok) {
         const data = await response.json();
-        const accessToken: String = data.access_token;
+        const accessToken: string = data.access_token;
         // TODO: トークンを保管して再利用する
     } else {
         window.alert("認証に失敗しました");
