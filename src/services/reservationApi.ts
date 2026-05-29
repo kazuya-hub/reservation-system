@@ -21,9 +21,9 @@ export async function reserveLesson(lessonId: number): Promise<void> {
 }
 
 export async function getAllReservations(): Promise<Reservation[]> {
-    return await apiFetch<Reservation[]>("/reservations/");
+    return await apiFetch<Reservation[]>("/reservations/me");
 }
 
 export async function getReservationById(reservationId: number): Promise<Reservation> {
-    return await apiFetch<Reservation>(`/reservations/${reservationId}/`);
+    return await apiFetch<Reservation>(`/reservations/${reservationId}`);
 }

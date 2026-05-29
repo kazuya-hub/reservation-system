@@ -9,5 +9,5 @@ export type User = {
 };
 
 export async function getCurrentUser(): Promise<User> {
-    return await apiFetch<User>("/users/me/");
+    return await apiFetch<User>("/users/me");
 }

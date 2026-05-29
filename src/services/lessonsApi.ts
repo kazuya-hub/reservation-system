@@ -15,13 +15,13 @@ export type Lesson = {
 };
 
 export async function getAllLessons(): Promise<Lesson[]> {
-    return await apiFetch<Lesson[]>("/lessons/");
+    return await apiFetch<Lesson[]>("/lessons");
 }
 
 export async function getMyReservedLessons(): Promise<Lesson[]> {
-    return await apiFetch<Lesson[]>("/lessons/me/reserved/");
+    return await apiFetch<Lesson[]>("/lessons/me/reserved");
 }
 
 export async function getLessonById(lessonId: number): Promise<Lesson> {
-    return await apiFetch<Lesson>(`/lessons/${lessonId}/`);
+    return await apiFetch<Lesson>(`/lessons/${lessonId}`);
 }
