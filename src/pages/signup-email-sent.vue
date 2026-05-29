@@ -4,6 +4,11 @@ import { signupSteps } from "@/constants/signup";
 import SignupStepIndicator from "@/components/SignupStepIndicator.vue";
 </script>
 
+<route lang="yaml">
+    meta:
+        requiresGuest: true
+</route>
+
 <template>
     <h2>メール受信確認</h2>
     <SignupStepIndicator :step="signupSteps.emailSent" />

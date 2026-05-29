@@ -32,6 +32,11 @@ async function handleLogin(event: Event) {
 }
 </script>
 
+<route lang="yaml">
+    meta:
+        requiresGuest: true
+</route>
+
 <template>
     <h2>ログイン</h2>
 

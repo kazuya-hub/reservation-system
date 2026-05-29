@@ -17,6 +17,11 @@ import SignupStepIndicator from "@/components/SignupStepIndicator.vue";
 
 </template>
 
+<route lang="yaml">
+    meta:
+        requiresGuest: true
+</route>
+
 <style scoped>
 .content-container {
     margin: 48px auto;

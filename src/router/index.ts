@@ -9,10 +9,13 @@ const router = createRouter({
 
 router.beforeEach(to => {
   const isLoggedIn = auth.isLoggedIn();
+
   if (to.meta.requiresAuth && !isLoggedIn) {
     return "/login";
-  } else if (to.path === "/login" && isLoggedIn) {
+
+  } else if (to.meta.requiresGuest && isLoggedIn) {
     return "/mypage";
+
   } else {
     return true;
   }

@@ -84,6 +84,11 @@ async function submitProfile() {
 
 </script>
 
+<route lang="yaml">
+    meta:
+        requiresGuest: true
+</route>
+
 
 <template>
     <h2>会員情報入力</h2>

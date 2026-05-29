@@ -35,6 +35,11 @@ async function submitEmail() {
 
 </script>
 
+<route lang="yaml">
+    meta:
+        requiresGuest: true
+</route>
+
 
 <template>
     <h2>新規登録</h2>
