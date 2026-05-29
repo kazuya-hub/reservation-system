@@ -1,5 +1,5 @@
 
-import { apiFetchJson } from "@/services/apiClient";
+import { apiFetch } from "@/services/apiClient";
 
 
 
@@ -11,7 +11,7 @@ export type Reservation = {
 };
 
 export async function reserveLesson(lessonId: number): Promise<void> {
-    return await apiFetchJson(`/reservations`, {
+    return await apiFetch(`/reservations`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -21,9 +21,9 @@ export async function reserveLesson(lessonId: number): Promise<void> {
 }
 
 export async function getAllReservations(): Promise<Reservation[]> {
-    return await apiFetchJson<Reservation[]>("/reservations/");
+    return await apiFetch<Reservation[]>("/reservations/");
 }
 
 export async function getReservationById(reservationId: number): Promise<Reservation> {
-    return await apiFetchJson<Reservation>(`/reservations/${reservationId}/`);
+    return await apiFetch<Reservation>(`/reservations/${reservationId}/`);
 }

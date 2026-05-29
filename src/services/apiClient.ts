@@ -29,12 +29,16 @@ function resolveUrl(input: RequestInfo | URL): RequestInfo | URL {
     return `${API_BASE_URL}${input.startsWith("/") ? input : `/${input}`}`;
 }
 
-export async function apiFetch(input: RequestInfo | URL, init: ApiFetchOptions = {}) {
+export async function apiFetch<T>(input: RequestInfo | URL, init: ApiFetchOptions = {}): Promise<T> {
     const { skipAuth = false, ...requestInit } = init;
     const headers = new Headers(init.headers ?? {});
 
     if (!headers.has("Accept")) {
         headers.set("Accept", "application/json");
+    }
+
+    if (!headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
     }
 
     if (!skipAuth) {
@@ -56,12 +60,6 @@ export async function apiFetch(input: RequestInfo | URL, init: ApiFetchOptions =
     if (!response.ok) {
         throw new ApiError(`API request failed: ${response.status}`, response.status);
     }
-
-    return response;
-}
-
-export async function apiFetchJson<T>(input: RequestInfo | URL, init: ApiFetchOptions = {}): Promise<T> {
-    const response = await apiFetch(input, init);
 
     if (response.status === 204) {
         return undefined as T;

@@ -1,4 +1,6 @@
 
+import { apiFetch } from "@/services/apiClient.ts";
+
 const LOCALSTORAGE_KEY_TOKEN = "token";
 
 declare const epochSecondsBrand: unique symbol;
@@ -13,40 +15,38 @@ export async function requestEmailVerification(email: string): Promise<void> {
     const params = new URLSearchParams();
     params.append("email", email);
 
-    const response = await fetch(
-        "http://127.0.0.1:8000/register-request",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email }),
-        }
-    );
-
-    if (!response.ok) {
+    try {
+        await apiFetch<void>(
+            "/register-request",
+            {
+                method: "POST",
+                body: JSON.stringify({ email }),
+            }
+        );
+    } catch {
         throw new Error("メール認証リクエストに失敗しました");
     }
 }
 
 
-export async function requestRegisterComplete(token: string, publicUserId: string, password: string): Promise<void> {
-    const response = await fetch(
-        "http://127.0.0.1:8000/register-complete-request",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                token,
-                public_user_id: publicUserId,
-                password
-            }),
-        }
-    );
-
-    if (!response.ok) {
+export async function requestRegisterComplete(
+    token: string,
+    publicUserId: string,
+    password: string
+): Promise<void> {
+    try {
+        await apiFetch(
+            "/register-complete-request",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    token,
+                    public_user_id: publicUserId,
+                    password
+                }),
+            }
+        );
+    } catch {
         throw new Error("登録完了リクエストに失敗しました");
     }
 }
@@ -169,23 +169,18 @@ export async function tryLogin(username: string, password: string): Promise<bool
     params.append("username", username);
     params.append("password", password);
 
-    const response = await fetch(
-        "http://127.0.0.1:8000/token",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: params.toString(),
-        }
-    );
-
-    if (!response.ok) {
-        return false;
-    }
-
     try {
-        const data = await response.json();
+        const data = await apiFetch<{ access_token: string }>(
+            "/token",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: params.toString(),
+            }
+        );
+
         const accessToken: string = data.access_token;
         setToken(accessToken);
         return true;

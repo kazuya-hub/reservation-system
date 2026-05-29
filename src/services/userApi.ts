@@ -1,5 +1,5 @@
 
-import { apiFetchJson } from "@/services/apiClient";
+import { apiFetch } from "@/services/apiClient";
 
 
 
@@ -9,5 +9,5 @@ export type User = {
 };
 
 export async function getCurrentUser(): Promise<User> {
-    return await apiFetchJson<User>("/users/me/");
+    return await apiFetch<User>("/users/me/");
 }

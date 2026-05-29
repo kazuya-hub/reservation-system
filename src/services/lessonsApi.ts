@@ -1,5 +1,5 @@
 
-import { apiFetchJson } from "@/services/apiClient";
+import { apiFetch } from "@/services/apiClient";
 
 
 
@@ -15,13 +15,13 @@ export type Lesson = {
 };
 
 export async function getAllLessons(): Promise<Lesson[]> {
-    return await apiFetchJson<Lesson[]>("/lessons/");
+    return await apiFetch<Lesson[]>("/lessons/");
 }
 
 export async function getMyReservedLessons(): Promise<Lesson[]> {
-    return await apiFetchJson<Lesson[]>("/lessons/me/reserved/");
+    return await apiFetch<Lesson[]>("/lessons/me/reserved/");
 }
 
 export async function getLessonById(lessonId: number): Promise<Lesson> {
-    return await apiFetchJson<Lesson>(`/lessons/${lessonId}/`);
+    return await apiFetch<Lesson>(`/lessons/${lessonId}/`);
 }
