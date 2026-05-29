@@ -4,7 +4,7 @@ import LessonCalendar from "@/components/LessonCalendar.vue";
 import { useRouter } from "vue-router";
 
 import * as auth from "@/services/auth.ts";
-import * as userApi from "@/services/userApi.ts";
+import * as lessonsApi from "@/services/lessonsApi.ts";
 
 const router = useRouter();
 
@@ -15,11 +15,11 @@ function handleLogout() {
 
 
 
-let pageContents = ref("");
+const myReservedLessons = ref<lessonsApi.Lesson[]>([]);
 
 onMounted(async () => {
-    const data = await userApi.getCurrentUser();
-    pageContents.value = JSON.stringify(data, null, 4);
+    const reservationsData = await lessonsApi.getMyReservedLessons();
+    myReservedLessons.value = reservationsData;
 });
 
 </script>
@@ -32,10 +32,7 @@ onMounted(async () => {
 <template>
     <h2>マイページ</h2>
     <h3>予約状況</h3>
-    <div style="white-space: pre-wrap">
-        {{ pageContents }}
-    </div>
-    <LessonCalendar />
+    <LessonCalendar :lessons="myReservedLessons" />
     <div class="actions">
         <RouterLink to="/lesson-calendar" class="router-link-as-button">レッスンを予約する</RouterLink>
         <button @click="handleLogout">ログアウトする</button>

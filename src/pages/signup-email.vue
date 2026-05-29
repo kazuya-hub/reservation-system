@@ -1,6 +1,25 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 import { signupSteps } from "@/constants/signup";
+import { requestEmailVerification } from "@/services/auth";
+
 import SignupStepIndicator from "@/components/SignupStepIndicator.vue";
+
+
+const email = ref("");
+const router = useRouter();
+
+async function submitEmail() {
+    try {
+        await requestEmailVerification(email.value);
+        router.push("/signup-email-sent");
+    } catch (error) {
+        // エラー処理
+        console.error(error);
+    }
+}
 
 </script>
 
@@ -11,8 +30,8 @@ import SignupStepIndicator from "@/components/SignupStepIndicator.vue";
 
     <div class="content-container">
         <div class="left-column">
-            <input type="email" placeholder="メールアドレス" />
-            <RouterLink to="/signup-email-sent" class="link-to-login router-link-as-button">登録する</RouterLink>
+            <input type="email" placeholder="メールアドレス" v-model="email" />
+            <button @click="submitEmail" class="link-to-login router-link-as-button">登録する</button>
         </div>
         
         <div class="right-column">

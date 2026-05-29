@@ -1,14 +1,11 @@
 <script setup lang="ts">
 
-const lesson = {
-    date: "2026-05-21",
-    startTime: "10:00",
-    endTime: "11:00",
-    studio: "渋谷スタジオ A",
-    className: "モーニングヨガ",
-    instructorName: "山田 花子",
-    reservedCount: 12,
-};
+import { useRoute } from "vue-router";
+
+import LessonDetail from "@/components/LessonDetail.vue";
+
+const route = useRoute();
+const lessonId = Number(route.query.id) || 1;
 
 </script>
 
@@ -18,32 +15,7 @@ const lesson = {
 
         <p>下記の内容で予約しました</p>
 
-        <dl class="detail-list">
-            <div class="detail-row">
-                <dt>日付</dt>
-                <dd>{{ lesson.date }}</dd>
-            </div>
-            <div class="detail-row">
-                <dt>開始時間 / 終了時間</dt>
-                <dd>{{ lesson.startTime }} - {{ lesson.endTime }}</dd>
-            </div>
-            <div class="detail-row">
-                <dt>実施スタジオ</dt>
-                <dd>{{ lesson.studio }}</dd>
-            </div>
-            <div class="detail-row">
-                <dt>クラス名</dt>
-                <dd>{{ lesson.className }}</dd>
-            </div>
-            <div class="detail-row">
-                <dt>講師名</dt>
-                <dd>{{ lesson.instructorName }}</dd>
-            </div>
-            <div class="detail-row">
-                <dt>予約済み人数</dt>
-                <dd>{{ lesson.reservedCount }} 人</dd>
-            </div>
-        </dl>
+        <LessonDetail :id="lessonId" />
 
         <div class="actions">
             <RouterLink to="/mypage" class="router-link-as-button">マイページに戻る</RouterLink>
