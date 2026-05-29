@@ -11,6 +11,48 @@ function nowEpochSeconds() {
 }
 
 
+type PublicUserIdValidationResult = {
+    valid: boolean;
+    reason?: string;
+};
+
+export function validatePublicUserId(
+    publicUserId: string
+): PublicUserIdValidationResult {
+    const publicUserIdRegex = /^[a-zA-Z0-9_-]+$/;
+    if (!publicUserIdRegex.test(publicUserId)) {
+        return { valid: false, reason: "IDは英数字、ハイフン、アンダースコアのみ使用可能です" };
+    }
+
+    if (publicUserId.length < 3 || publicUserId.length > 30) {
+        return { valid: false, reason: "IDは3文字以上30文字以下である必要があります" };
+    }
+
+    return { valid: true };
+}
+
+
+type PasswordValidationResult = {
+    valid: boolean;
+    reason?: string;
+};
+
+export function validatePassword(password: string): PasswordValidationResult {
+    if (password.length < 8) {
+        return { valid: false, reason: "パスワードは8文字以上にして下さい" };
+    }
+
+    if (
+        !/[a-zA-Z]/.test(password)
+        || !/[0-9]/.test(password)
+        || !/[!@#$%^&*(),.?":{}|<>-]/.test(password)
+    ) {
+        return { valid: false, reason: "パスワードは英字・数字・記号を含める必要があります" };
+    }
+
+    return { valid: true };
+}
+
 export async function requestEmailVerification(email: string): Promise<void> {
     const params = new URLSearchParams();
     params.append("email", email);
@@ -191,4 +233,19 @@ export async function tryLogin(username: string, password: string): Promise<bool
 
 export function logout() {
     clearToken();
+}
+
+export async function fetchPublicUserIdAvailability(publicUserId: string): Promise<boolean> {
+    try {
+        const data = await apiFetch<{ available: boolean }>(
+            "/public-user-id/availability",
+            {
+                method: "POST",
+                body: JSON.stringify({ public_user_id: publicUserId }),
+            }
+        );
+        return data.available;
+    } catch {
+        return false;
+    }
 }
