@@ -26,7 +26,7 @@ async function submitEmail() {
         }
 
         await requestEmailVerification(email.value);
-        router.push("/signup-email-sent");
+        // router.push("/signup-email-sent");
     } catch (error) {
         // エラー処理
         console.error(error);

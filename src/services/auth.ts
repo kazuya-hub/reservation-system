@@ -58,13 +58,14 @@ export async function requestEmailVerification(email: string): Promise<void> {
     params.append("email", email);
 
     try {
-        await apiFetch<void>(
+        const response = await apiFetch<any>(
             "/register-request",
             {
                 method: "POST",
                 body: JSON.stringify({ email }),
             }
         );
+        console.log(response);
     } catch {
         throw new Error("メール認証リクエストに失敗しました");
     }
