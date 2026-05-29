@@ -9,6 +9,48 @@ function nowEpochSeconds() {
 }
 
 
+export async function requestEmailVerification(email: string): Promise<void> {
+    const params = new URLSearchParams();
+    params.append("email", email);
+
+    const response = await fetch(
+        "http://127.0.0.1:8000/register-request",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("メール認証リクエストに失敗しました");
+    }
+}
+
+
+export async function requestRegisterComplete(token: string, publicUserId: string, password: string): Promise<void> {
+    const response = await fetch(
+        "http://127.0.0.1:8000/register-complete-request",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                token,
+                public_user_id: publicUserId,
+                password
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("登録完了リクエストに失敗しました");
+    }
+}
+
 export type JwtPayload = {
     sub: string,
     exp: number,
