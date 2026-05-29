@@ -13,6 +13,18 @@ const router = useRouter();
 
 async function submitEmail() {
     try {
+        const emailTrimmed = email.value.trim();
+        if (emailTrimmed === "") {
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailTrimmed)) {
+            // 簡単なメールアドレスの形式チェック
+            alert("有効なメールアドレスを入力してください");
+            return;
+        }
+
         await requestEmailVerification(email.value);
         router.push("/signup-email-sent");
     } catch (error) {
